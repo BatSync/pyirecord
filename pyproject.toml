@@ -1,5 +1,5 @@
 [project]
-name = "pyrecord"
+name = "pyirecord"
 version = "0.0.1"
 description = "A client library for iRecord similar to pyinaturalist"
 readme = "README.md"

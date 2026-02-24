@@ -1,7 +1,7 @@
 import requests
 import os
 
-BASE_URL = os.environ.get("IRECORD_BASE_URL", "https://irecord.org.uk/")
+BASE_URL = os.environ.get("IRECORD_BASE_URL", "https://irecord.org.uk")
 
 
 def headers(access_token: str):
@@ -20,3 +20,9 @@ def get_projects(access_token: str):
     for suffix in ("/projects", "/rest/projects", "/index.php/rest/projects"):
         response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
         print(response)
+
+
+def get_docs(access_token: str):
+    suffix = "/index.php/services/rest"
+    response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
+    return response
