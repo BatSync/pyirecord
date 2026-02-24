@@ -218,7 +218,7 @@ wheels = [
 ]
 
 [[package]]
-name = "pyrecord"
+name = "pyirecord"
 version = "0.0.1"
 source = { virtual = "." }
 dependencies = [
@@ -242,7 +242,7 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "httpx" },
-    { name = "pyrecord", extras = ["test", "lint"], marker = "extra == 'dev'" },
+    { name = "pyirecord", extras = ["test", "lint"], marker = "extra == 'dev'" },
     { name = "pytest", marker = "extra == 'test'" },
     { name = "python-dotenv" },
     { name = "requests" },

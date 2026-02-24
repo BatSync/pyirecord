@@ -9,6 +9,6 @@ dependencies = ["httpx", "python-dotenv", "requests"]
 [project.optional-dependencies]
 test = ["pytest"]
 lint = ["ruff"]
-dev = ["pyrecord[test,lint]"]
+dev = ["pyirecord[test,lint]"]
 
 
