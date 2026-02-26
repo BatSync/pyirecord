@@ -19,7 +19,7 @@ def headers(access_token: str):
 
 
 def get_observation(observation_id: int, access_token: str):
-    url = f"{BASE_URL}/index.php/services/occurrences/{observation_id}"
+    url = f"{BASE_URL}/index.php/services/rest/occurrences/{observation_id}"
     try:
         response = requests.get(url)
     except Exception as err:
@@ -53,7 +53,7 @@ def get_projects(access_token: str):
 
 
 def get_docs(access_token: str):
-    suffix = "/index.php/services/rest"
+    suffix = "/index.php/services/rest/projects"
     try:
         response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
     except Exception as err:

@@ -11,4 +11,6 @@ test = ["pytest"]
 lint = ["ruff"]
 dev = ["pyirecord[test,lint]"]
 
-
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
