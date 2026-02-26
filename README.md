@@ -15,6 +15,8 @@ Planned minimum functioning includes:
 
 ## Get started 
 
+### Set up environment 
+
 Recommend use of `uv` to manage python environment. This creates a new virtualenv, installs the dependencies and the package:
 
 ```
@@ -30,7 +32,7 @@ python -m venv .venv
 pip install -e .
 ```
 
-### Config file
+### Add config file
 
 We use `.env` to hold config environment variables. 
 
@@ -49,6 +51,13 @@ iRecord Client ID and Secret are used for OAuth identification, and are *obtaine
 iRecord User and Password are for temporary testing purposes only - in normal use they would be commandline options or passed through a web application.
 
 `IRECORD_BASE_URL` is the *warehouse* address, distinct from the iRecord URL we use to request the token.
+
+### Run integration test
+
+We have a test which tries to hit a few endpoints (appears passing, just to check the responses).
+
+`py.test test/integration/test_e2e.py`
+
 
 ## iRecord REST API
 
