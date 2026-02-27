@@ -4,6 +4,7 @@ from pyirecord.observations import (
     get_projects,
     get_docs,
     get_observation,
+    get_surveys,
     create_observation,
 )
 from dotenv import load_dotenv
@@ -14,6 +15,9 @@ load_dotenv()
 def test_e2e():
     t = jwt_token(os.environ.get("IRECORD_USER"), os.environ.get("IRECORD_PASSWD"))
     p = get_projects(t)
+    print(p.url)
+    print(p.content)
+    p = get_surveys(t)
     print(p.url)
     print(p.content)
 

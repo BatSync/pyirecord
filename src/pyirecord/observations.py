@@ -41,6 +41,17 @@ def create_observation(survey: int, doc: dict, access_token: str) -> bool:
     return response
 
 
+def get_surveys(access_token: str):
+    suffix = "/index.php/services/rest/surveys"
+    url = f"{BASE_URL}{suffix}"
+    try:
+        response = requests.get(url, headers=headers(access_token))
+    except Exception as err:
+        logging.error(err)
+        raise
+    return response
+
+
 def get_projects(access_token: str):
     suffix = "/index.php/services/rest/projects"
     url = f"{BASE_URL}{suffix}"

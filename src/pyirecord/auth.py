@@ -53,6 +53,6 @@ def jwt_token(username: str, password: str):
             response.raise_for_status()
             token_info = response.json()
         except Exception as e:
-            print(e)
+            logging.error(e)
             raise
     return token_info.get("access_token")
