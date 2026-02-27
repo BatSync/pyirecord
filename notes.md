@@ -1,5 +1,26 @@
 # Notes on integration
 
+## Taxa 
+
+https://github.com/Indicia-Team/indicia-docs/blob/531ba71cbd18ac41bc4bd0772b67803b4106c5a8/developing/data-model/taxa.rst
+
+- describes how the taxonomy database is set up 
+
+There is not a REST endpoint for search but there are "Data Services"
+
+Described here:
+https://github.com/Indicia-Team/indicia-docs/blob/531ba71cbd18ac41bc4bd0772b67803b4106c5a8/developing/web-services/data-services-taxon-search.rst
+
+Going from the code comment here, the endpoint is /services/data/taxa_search
+https://github.com/Indicia-Team/warehouse/blob/748ee5bbd99b7b4e76aa1751c7720bef444cb368/modules/indicia_svc_data/controllers/services/data.php#L607
+
+The code here shows a query string https://github.com/Indicia-Team/warehouse/blob/748ee5bbd99b7b4e76aa1751c7720bef444cb368/application/views/taxa_search/index.php#L40
+
+taxa_search?filter-taxon_list_id=$defaultListId&filter-taxa_taxon_list_id={taxa_taxon_list_id}
+
+## General
+
+
 A very reluctantly CoPilot-generated walkthrough of the JSON requests and responses that _should_ work with this API, if we can figure out where to find the endpoints.
 
 Upload to Media Queue
