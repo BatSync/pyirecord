@@ -1,21 +1,15 @@
 import requests
 import os
 import logging
+from typing import Optional
 from dotenv import load_dotenv
+from pyirecord.http import headers
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 load_dotenv()
 
 BASE_URL = os.environ.get("IRECORD_BASE_URL", "https://irecord.org.uk")
-
-
-def headers(access_token: str):
-    """Set the headers to authenticate with our"""
-    # Set the authorisation header to USER:[client system ID]:SECRET:[secret]
-    h = {"Authorization": f"Bearer {access_token}", "Accept": "application/json"}
-    logging.debug(h)
-    return h
 
 
 def get_observation(observation_id: int, access_token: str):
@@ -31,7 +25,9 @@ def get_observation(observation_id: int, access_token: str):
     return response.json()
 
 
-def create_observation(survey: int, doc: dict, access_token: str, trial: True) -> bool:
+def create_observation(
+    survey: int, doc: dict, access_token: str, trial: Optional[bool] = True
+) -> bool:
     """Create a new observation within a survey.
 
     survey (int) - an ID
@@ -51,34 +47,18 @@ def create_observation(survey: int, doc: dict, access_token: str, trial: True) -
     return response
 
 
-def get_surveys(access_token: str):
-    suffix = "/index.php/services/rest/surveys"
-    url = f"{BASE_URL}{suffix}"
-    try:
-        response = requests.get(url, headers=headers(access_token))
-    except Exception as err:
-        logging.error(err)
-        raise
-    return response
-
-
-def get_projects(access_token: str):
-    suffix = "/index.php/services/rest/projects"
-    url = f"{BASE_URL}{suffix}"
-    try:
-        response = requests.get(url, headers=headers(access_token))
-    except Exception as err:
-        logging.error(err)
-        raise
-    return response
-
-
 def get_docs(access_token: str):
-    suffix = "/index.php/services/rest/projects"
+    suffix = "/index.php/services/rest/"
+    h = headers(access_token)
+    # It only returns HTML and you have to ask for that explicit like
+    h["Accept"] = "text/html"
     try:
-        response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
+        response = requests.get(f"{BASE_URL}{suffix}", headers=h)
     except Exception as err:
         logging.error(err)
         raise
 
-    return response
+    response.raise_for_status()
+
+    # Just give back the document. Better than a no-op
+    return str(response.content)

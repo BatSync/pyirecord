@@ -1,6 +1,9 @@
 import pytest
 from pyirecord.auth import jwt_token
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 @pytest.fixture
@@ -27,3 +30,9 @@ def sample_record():
 @pytest.fixture
 def jwt():
     return jwt_token(os.environ.get("IRECORD_USER"), os.environ.get("IRECORD_PASSWD"))
+
+
+@pytest.fixture
+def sample_id():
+    """An occurrence ID in iRecord. Defaults to one of JW's"""
+    return os.environ.get("TEST_SAMPLE_ID", 38001839)

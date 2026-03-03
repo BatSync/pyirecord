@@ -1,40 +1,36 @@
-import os
-from pyirecord.auth import jwt_token
+"""Integration tests that are a bit of a kludge -
+Hardcode a record name so they're limited to Jo's user.
+For interface development - replace or refine later"""
+
 from pyirecord.observations import (
-    get_projects,
     get_docs,
     get_observation,
-    get_surveys,
     create_observation,
 )
-from dotenv import load_dotenv
 
-load_dotenv()
-
-
-def test_e2e():
-    t = jwt_token(os.environ.get("IRECORD_USER"), os.environ.get("IRECORD_PASSWD"))
-    p = get_projects(t)
-    print(p.url)
-    print(p.content)
-    p = get_surveys(t)
-    print(p.url)
-    print(p.content)
+from pyirecord.surveys import survey_id, get_surveys
 
 
-def test_doc():
-    t = jwt_token(os.environ.get("IRECORD_USER"), os.environ.get("IRECORD_PASSWD"))
-    d = get_docs(t)
-    print(d.url)
-    print(d.content)
+def test_e2e(jwt):
+    surveys = get_surveys(jwt)
+    assert len(surveys)
+    assert "values" in surveys[0]
 
 
-def test_obs(sample_record):
-    t = jwt_token(os.environ.get("IRECORD_USER"), os.environ.get("IRECORD_PASSWD"))
-    d = get_observation(38001839, access_token=t)
-    print(d.url)
-    print(d.content)
+def test_doc(jwt):
+    doc = get_docs(jwt)
+    # check for presence of arbitrary string in API docs (HTML only)
+    assert 'endpoint' in str(doc)
 
-    c = create_observation(1, sample_record, access_token=t)
+def test_obs(jwt, sample_id):
+    d = get_observation(sample_id, access_token=jwt)
+    assert "values" in d
+    # int ID comes back as string type
+    assert d["values"]["id"] == str(sample_id)
+
+
+def test_create(sample_record, jwt):
+    s_id = survey_id("iRecord Bats", jwt)
+    c = create_observation(s_id, sample_record, access_token=jwt)
     print(c.url)
     print(c.content)
