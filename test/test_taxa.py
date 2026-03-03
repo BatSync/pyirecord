@@ -1,4 +1,5 @@
-from pyirecord.taxa import taxa_search 
+from pyirecord.taxa import taxa_search
+
 
 def test_taxa(jwt):
     s_id = taxa_search(jwt)

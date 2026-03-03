@@ -19,23 +19,33 @@ def headers(access_token: str):
 
 
 def get_observation(observation_id: int, access_token: str):
+    """Get JSON data for a single occurrence.
+    Must be an ID of one of your own observations"""
+
     url = f"{BASE_URL}/index.php/services/rest/occurrences/{observation_id}"
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers(access_token))
     except Exception as err:
         logging.error(err)
         raise
-    return response
+    return response.json()
 
 
-def create_observation(survey: int, doc: dict, access_token: str) -> bool:
+def create_observation(survey: int, doc: dict, access_token: str, trial: True) -> bool:
+    """Create a new observation within a survey.
+
+    survey (int) - an ID
+    doc - the JSON which we are going to post. For now that's iRecord's internal format
+    access token - Javascript Web Token that has permissions for a user account
+    trial - whether this is a testing record. Assume, in the short term, thats the default.
+    """
     suffix = "/index.php/services/rest/samples"
     try:
         response = requests.post(
             f"{BASE_URL}{suffix}", headers=headers(access_token), data=doc
         )
 
-    except Exception as err:  # make narrow
+    except Exception as err:  # make narrower
         logging.error(err)
         raise
     return response
