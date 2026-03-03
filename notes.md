@@ -18,6 +18,28 @@ The code here shows a query string https://github.com/Indicia-Team/warehouse/blo
 
 taxa_search?filter-taxon_list_id=$defaultListId&filter-taxa_taxon_list_id={taxa_taxon_list_id}
 
+We should use the /rest/ over the older /data/ endpoints.
+
+There is an elasticsearch endpoint, which is here:
+
+_Using the endpoint https://warehouse1.indicia.org.uk/index.php/services/rest/es-occurrences/_search with a body containing_
+
+{"query":{"bool":{"must":[
+  {"match_phrase": {
+    "event.date_start": "2026-03-02"
+  }},
+  {"match_phrase": {
+    "location.output_sref": "SD470599"
+  }},
+  {"match_phrase": {
+    "metadata.trial": true
+  }}
+]}}}
+
+_returns all my records on a particular date in a particular grid square with an added parameter to select only training records._
+
+Try this, authenticating first, report back.
+
 ## General
 
 
