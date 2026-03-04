@@ -62,4 +62,4 @@ def media_queue(files: dict, access_token: str):
         raise
 
     response.raise_for_status()
-    return response
+    return response.json()

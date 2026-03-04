@@ -36,10 +36,9 @@ def create_observation(
     trial - whether this is a testing record. Assume, in the short term, thats the default.
     """
     suffix = "/index.php/services/rest/samples"
+    h = headers(access_token)
     try:
-        response = requests.post(
-            f"{BASE_URL}{suffix}", headers=headers(access_token), data=doc
-        )
+        response = requests.post(f"{BASE_URL}{suffix}", headers=h, json=doc)
 
     except Exception as err:  # make narrower
         logging.error(err)
@@ -65,7 +64,9 @@ def get_docs(access_token: str) -> str:
 
 
 def attributes(access_token: str) -> dict:
-    suffix = "/index.php/services/rest/occurrence-attributes"
+    """Get identifiers and brief metadata for all "occurrence attributes"
+    - think of these as controlled tags"""
+    suffix = "/index.php/services/rest/occurrence-attributes-websites"
     try:
         response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
     except Exception as err:
@@ -77,3 +78,18 @@ def attributes(access_token: str) -> dict:
     # Transform it into a dict with IDs for keys
 
     return {x["values"]["id"]: x["values"] for x in response.json()}
+
+
+def attribute_terms(attr_id: int, access_token: str):
+    """Find out more about the values we can use with an attribute, given its ID"""
+    suffix = "/index.php/services/rest/occurrence-attributes"
+    try:
+        response = requests.get(
+            f"{BASE_URL}{suffix}/{attr_id}", headers=headers(access_token)
+        )
+    except Exception as err:
+        logging.error(err)
+        raise
+
+    response.raise_for_status()
+    return response.json()
