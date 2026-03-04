@@ -47,7 +47,7 @@ def create_observation(
     return response
 
 
-def get_docs(access_token: str):
+def get_docs(access_token: str) -> str:
     suffix = "/index.php/services/rest/"
     h = headers(access_token)
     # It only returns HTML and you have to ask for that explicit like
@@ -62,3 +62,18 @@ def get_docs(access_token: str):
 
     # Just give back the document. Better than a no-op
     return str(response.content)
+
+
+def attributes(access_token: str) -> dict:
+    suffix = "/index.php/services/rest/occurrence-attributes"
+    try:
+        response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
+    except Exception as err:
+        logging.error(err)
+        raise
+
+    response.raise_for_status()
+    # Raw response is raw - list where every item has a single key, 'values'
+    # Transform it into a dict with IDs for keys
+
+    return {x["values"]["id"]: x["values"] for x in response.json()}

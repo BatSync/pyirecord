@@ -20,7 +20,8 @@ def test_e2e(jwt):
 def test_doc(jwt):
     doc = get_docs(jwt)
     # check for presence of arbitrary string in API docs (HTML only)
-    assert 'endpoint' in str(doc)
+    assert "endpoint" in str(doc)
+
 
 def test_obs(jwt, sample_id):
     d = get_observation(sample_id, access_token=jwt)

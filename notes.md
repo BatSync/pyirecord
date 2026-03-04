@@ -206,7 +206,7 @@ JSON
   }
 }
 
-When creating an occurrence in an existing sample, you POST to /index.php/services/rest/occurrences:
+When creating an occurrence in an existing sample[? survey?], you POST to /index.php/services/rest/occurrences:
 JSON
 
 {
