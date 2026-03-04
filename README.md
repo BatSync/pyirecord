@@ -8,6 +8,7 @@ Very much a work in progress - working functionality consists of:
 * Read the list of surveys available and retrieve their identifiers
 * Read the JSON metadata for an occurrence (limited to those the user has created)
 * Retrieve the "Occurrence Attributes" (controlled equivalent of iNat's "Observation Fields")
+* Search through taxonomies for IDs to label and link observations
 
 Planned minimum functioning includes:
 
