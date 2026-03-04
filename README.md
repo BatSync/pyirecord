@@ -5,6 +5,8 @@ A minimal library aiming to offer a similar interface to [pyinaturalist](https:/
 Very much a work in progress - working functionality consists of:
 
 * Authenticate with OAuth and get a JWT token for a user
+* Read the list of surveys available and retrieve their identifiers
+* Read the JSON metadata for an occurrence (limited to those the user has created)
 
 Planned minimum functioning includes:
 
@@ -60,6 +62,8 @@ We have a test which tries to hit a few endpoints (appears passing, just to chec
 
 
 ## iRecord REST API
+
+iRecord runs on a platform called Indicia Warehouse. It has a REST API that's provided by Indicia. Obtain a token from the iRecord developers - authentication is via iRecord and requests for data are directly against Indicia. 
 
 * [Indicia docs - RESTful web service resources](https://indicia-docs.readthedocs.io/en/latest/developing/rest-web-services/resources.html#index-php-services-rest)
 * [Indicia warehouse REST endpoint](https://warehouse1.indicia.org.uk/index.php/services/rest) - generated documentation

@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 
 def taxa_search(access_token: str):
     """Returns a raw list of surveys accessible to the current user"""
-    suffix = "/index.php/services/data/taxa_search"
+    suffix = "/index.php/services/rest/taxa"
     url = f"{BASE_URL}{suffix}"
     # TODO figure out how we supply a name as query param - see notes.md
     try:

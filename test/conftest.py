@@ -9,12 +9,13 @@ load_dotenv()
 @pytest.fixture
 def sample_record():
     """https://indicia-docs.readthedocs.io/en/latest/developing/rest-web-services/resources.html#index-php-services-samples"""  # noqa: E501
+    """Replace s_id with the survey you are posting to"""
     return {
         "values": {
-            "survey_id": 1,
+            "survey_id": "{s_id}",
             "entered_sref": "SU1234",
             "entered_sref_system": "OSGB",
-            "date": "01/08/2020",
+            "date": "01/08/2026",
         },
         "occurrences": [
             {

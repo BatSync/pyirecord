@@ -40,6 +40,107 @@ _returns all my records on a particular date in a particular grid square with an
 
 Try this, authenticating first, report back.
 
+
+as documented at https://warehouse1.indicia.org.uk/index.php/services/rest, the taxon_list_id is required.
+The UK Species Inventory list has id=15
+
+https://warehouse1.indicia.org.uk/index.php/services/rest/taxa/search?taxon_list_id=15 without a search term returns maybe a hundred random taxa.
+
+https://warehouse1.indicia.org.uk/index.php/services/rest/taxa/search?taxon_list_id=15&searchQuery=Myotis nattereri&preferred=true returns a single taxon (plus some metadata) like
+"data": [{
+  "taxa_taxon_list_id": "165379",
+  "searchterm": "Myotis nattereri (Kuhl, 1817)",
+  "highlighted": "'''<b>Myotis</b> <b>nattereri</b>'''",
+  "taxon": "Myotis nattereri",
+  "authority": "(Kuhl, 1817)",
+  "language_iso": "lat",
+  "preferred_taxon": "Myotis nattereri",
+  "preferred_authority": "(Kuhl, 1817)",
+  "default_common_name": "Natterer's Bat",
+  "taxon_group": "terrestrial mammal",
+  "preferred": "t",
+  "preferred_taxa_taxon_list_id": "165379",
+  "taxon_meaning_id": "70366",
+  "external_key": "NHMSYS0000080184",
+  "search_code": "NHMSYS0000080184",
+  "organism_key": "NBNORG0000049704",
+  "taxon_group_id": "150",
+  "parent_id": "91963",
+  "identification_difficulty": "4",
+  "id_diff_verification_rule_id": "2",
+  "taxon_rank_sort_order": "300",
+  "taxon_rank": "Species"
+}],
+
+## Occurrences
+
+To POST an occurrence the endpoint is https://warehouse1.indicia.org.uk/index.php/services/rest/samples and my payload 
+{
+  "values": {
+    "survey_id": 42,
+    "entered_sref": "SD470599",
+    "entered_sref_system": "OSGB",
+    "date": "02\/03\/2026",
+    "training": "t"
+  },
+  "occurrences": [{
+    "values": {
+      "taxa_taxon_list_id": 98607,
+      "occAttr:54": 859,
+      "training": "t"
+    }
+  }]
+}
+
+returns the response (which may be missing a closing brace?)
+{
+  "values":{
+    "id":"34415925","
+    Created_on":"2026-03-02T11:23:24+00:00","
+    Updated_on":"2026-03-02T11:23:24+00:00"},
+    "href":"https:\/\/warehouse1.indicia.org.uk\/index.php\/services\/rest\/samples\/34415925",
+    "occurrences":[{
+      "values":{
+        "id":50388663,
+        "created_on":"2026-03-02T11:23:24+00:00",
+        "updated_on":"2026-03-02T11:23:24+00:00"
+      },
+      "href":"https:\/\/warehouse1.indicia.org.uk\/index.php\/services\/rest\/occurrences\/50388663"
+    }]
+}
+
+
+This is doing exactly the same as the mobile apps and all works for me as documented. I am using Postman to make these requests but this is the Curl equivalent.
+
+curl --location 'https://warehouse1.indicia.org.uk/index.php/services/rest/samples' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token> \
+--data '{
+  "values": {
+    "survey_id": 42,
+    "entered_sref": "SD470599",
+    "entered_sref_system": "OSGB",
+    "date": "02\/03\/2026",
+    "training": "t"
+  },
+  "occurrences": [{
+    "values": {
+      "taxa_taxon_list_id": 98607,
+      "occAttr:54": 859,
+      "training": "t"
+    }
+  }]
+}
+'
+
+_end of Jim's notes_
+
+The "occAttr" integer sets correspond to [Occurrence Attributes](https://irecord.org.uk/help/import-fields) - you can infer what they are by looking at the guidelines for spreadsheet import to Indicia but this doesn't give a mapping to integer codes for terms and their values. The value ranges are defined as [term lists](https://irecord.org.uk/help/import-termlists) where they are set. It's all similar to iNat's "Observation Fields" but not user-editable.
+
+We can't look at other bat records to see commonly used occattrs and I can't bring myself to ask Jim again
+
+
+
 ## General
 
 
