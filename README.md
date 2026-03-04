@@ -9,12 +9,11 @@ Very much a work in progress - working functionality consists of:
 * Read the JSON metadata for an occurrence (limited to those the user has created)
 * Retrieve the "Occurrence Attributes" (controlled equivalent of iNat's "Observation Fields")
 * Search through taxonomies for IDs to label and link observations
+* Upload media for an occurrence
 
 Planned minimum functioning includes:
 
-* Upload media for an occurrence
 * Create a new occurrence
-* Show the taxon list for the current survey
 * Find a list of occurrences created by the logged in user
 
 ## Get started 
