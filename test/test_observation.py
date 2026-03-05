@@ -1,4 +1,5 @@
-from pyirecord.observations import create_observation, attribute_terms
+from pyirecord.observations import create_observation
+from pyirecord.attributes import attribute_terms
 from pyirecord.surveys import survey_id
 
 
@@ -11,5 +12,5 @@ def test_create(sample_record, jwt):
 
 
 def test_terms(jwt):
-    attr_id = 815  # Habitat detail
+    attr_id = 18  # Number of creatures
     print(attribute_terms(attr_id, jwt))

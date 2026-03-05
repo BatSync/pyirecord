@@ -1,14 +1,20 @@
 import requests
 import logging
+from typing import Optional
 from pyirecord.http import headers, BASE_URL
 
 
-def attributes(access_token: str) -> dict:
+def attributes(access_token: str, survey_id: Optional[int] = None) -> dict:
     """Get identifiers and brief metadata for all "occurrence attributes"
     - think of these as controlled tags"""
     suffix = "/index.php/services/rest/occurrence-attributes"
+    params = {}
+    if survey_id:
+        params["restrict_to_survey_id"] = survey_id
     try:
-        response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
+        response = requests.get(
+            f"{BASE_URL}{suffix}", headers=headers(access_token), params=params
+        )
     except Exception as err:
         logging.error(err)
         raise

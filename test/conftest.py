@@ -20,8 +20,8 @@ def sample_record():
         "occurrences": [
             {
                 "values": {
-                    "taxa_taxon_list_id": 288176,
-                    "occAttr:815": "a habitat",
+                    "taxa_taxon_list_id": 167190,
+                    "occAttr:18": "1",
                 },
             }
         ],
