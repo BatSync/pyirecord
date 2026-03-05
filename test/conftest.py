@@ -1,6 +1,7 @@
 import pytest
 from pyirecord.auth import jwt_token
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -29,6 +30,16 @@ def sample_record():
 
 
 @pytest.fixture
+def data_dir():
+    return Path(__file__).parent.parent.resolve() / "data"
+
+
+@pytest.fixture
+def sample_media(data_dir):
+    return data_dir / "bat_recording.wav"
+
+
+@pytest.fixture
 def jwt():
     return jwt_token(os.environ.get("IRECORD_USER"), os.environ.get("IRECORD_PASSWD"))
 
@@ -36,4 +47,10 @@ def jwt():
 @pytest.fixture
 def sample_id():
     """An occurrence ID in iRecord. Defaults to one of JW's"""
-    return os.environ.get("TEST_SAMPLE_ID", 38001839)
+    return os.environ.get("IRECORD_TEST_SAMPLE_ID", 38001839)
+
+
+@pytest.fixture
+def survey_name():
+    """An occurrence ID in iRecord. Defaults to one of JW's"""
+    return os.environ.get("IRECORD_TEST_SURVEY", "iRecord Bats")

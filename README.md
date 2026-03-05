@@ -1,8 +1,6 @@
 # PyiRecord
 
-A minimal library aiming to offer a similar interface to [pyinaturalist](https://pyinaturalist.readthedocs.io/) but for the UK's [iRecord](https://irecord.org.uk) national observatory.
-
-Very much a work in progress - working functionality consists of:
+A minimal library aiming to offer a similar interface to [pyinaturalist](https://pyinaturalist.readthedocs.io/) but for the UK's [iRecord](https://irecord.org.uk) national observatory. We currently support these actions:
 
 * Authenticate with OAuth and get a JWT token for a user
 * Read the list of surveys available and retrieve their identifiers
@@ -10,11 +8,12 @@ Very much a work in progress - working functionality consists of:
 * Retrieve the "Occurrence Attributes" (controlled equivalent of iNat's "Observation Fields")
 * Search through taxonomies for IDs to label and link observations
 * Upload media for an occurrence
+* Create a new occurrence
 
 Planned minimum functioning includes:
 
-* Create a new occurrence
 * Find a list of occurrences created by the logged in user
+* Search for recent occurrences within a radius (for de-duplication).
 
 ## Get started 
 
