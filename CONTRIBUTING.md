@@ -1,12 +1,10 @@
-Thank you for thinking about contributing to BatSync!
+Thank you for thinking about contributing to pyirecord!
 
-The project has an issues list of new or in-progress features, which it's worth reading through.
-
-As of writing, it's a solo-developer effort - please contact zool to figure out where input is most needed!
+The library is a spin-out from [BatSync](https://codeberg.org/BatSync/batsync) and really focuses on our narrow needs for posting bat call audio data with standards-oriented metadata though to NBN Atlas via [iRecord](https://irecord.org.uk/). But it should work as a generic interface library for any installation of [Indicia Warehouse](https://github.com/Indicia-Team/warehouse), the platform that powers iRecord.
 
 ## Code style
 
-* We use `ruff` for linting and autoformatting python code:
+- We use `ruff` for linting and autoformatting python code:
 
 ```
 uv pip install ruff
@@ -14,18 +12,12 @@ ruff check --fix
 ruff format
 ```
 
-* We use `eslint` for rough JS linting and `prettier` for formatting:
+- We use `prettier` for formatting if needed:
 
 ```
-npx prettier web/html/main.js --write
+npx prettier README --write
 ```
 
 ## Design decisions
 
-The ethos of this project is to remain as self-contained as possible in terms of dependencies that might change.
-
-For the python API this means `librosa` and `matplotlib` rather than the enormously powerful, but also enormous `opensoundscape`.
-
-For the Javascript front-end this means no npm, no framework or build system, static files that delegate the hard work to the API and can run anywhere.
-
-
+The aim of this project is "minimum complexity", to remain as self-contained as possible in terms of dependencies that might change.

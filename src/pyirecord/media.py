@@ -42,10 +42,12 @@ def media_queue(files: dict, access_token: str):
                 raise MediaError(err)
 
             files[k] = (f, open(f, "rb"), mimetype)
+    logging.debug(files)
 
-    print(files)
     h = headers(access_token)
-    del h["Accept"]
+    del h[
+        "Accept"
+    ]  # Don't send application/json - let requests.post sort Content-Types
 
     try:
         response = requests.post(url, headers=h, files=files)
