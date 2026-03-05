@@ -1,9 +1,5 @@
-from pyirecord.observations import create_observation, attributes, attribute_terms
+from pyirecord.observations import create_observation, attribute_terms
 from pyirecord.surveys import survey_id
-
-
-def test_attrs(jwt):
-    print(attributes(jwt))
 
 
 def test_create(sample_record, jwt):
