@@ -37,7 +37,7 @@ def create_observation(
     except Exception as err:  # make narrower
         logging.error(err)
         raise
-    return response
+    return response.json()
 
 
 def get_docs(access_token: str) -> str:

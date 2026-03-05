@@ -36,7 +36,7 @@ def data_dir():
 
 @pytest.fixture
 def sample_media(data_dir):
-    return data_dir / "bat_recording.wav"
+    return str(data_dir / "bat_recording.wav")
 
 
 @pytest.fixture
