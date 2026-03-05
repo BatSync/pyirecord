@@ -1,12 +1,6 @@
 import requests
 import logging
-from dotenv import load_dotenv
-from pyirecord import BASE_URL
-from pyirecord.http import headers
-
-logging.basicConfig(level=logging.INFO)
-
-load_dotenv()
+from pyirecord.http import headers, BASE_URL
 
 
 def get_surveys(access_token: str):

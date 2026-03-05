@@ -1,15 +1,9 @@
 import requests
-import os
 import logging
 from typing import Optional
-from dotenv import load_dotenv
-from pyirecord.http import headers
+from pyirecord.http import headers, BASE_URL
 
 logging.basicConfig(level=logging.INFO)
-
-load_dotenv()
-
-BASE_URL = os.environ.get("IRECORD_BASE_URL", "https://irecord.org.uk")
 
 
 def get_observation(observation_id: int, access_token: str):
@@ -61,35 +55,3 @@ def get_docs(access_token: str) -> str:
 
     # Just give back the document. Better than a no-op
     return str(response.content)
-
-
-def attributes(access_token: str) -> dict:
-    """Get identifiers and brief metadata for all "occurrence attributes"
-    - think of these as controlled tags"""
-    suffix = "/index.php/services/rest/occurrence-attributes-websites"
-    try:
-        response = requests.get(f"{BASE_URL}{suffix}", headers=headers(access_token))
-    except Exception as err:
-        logging.error(err)
-        raise
-
-    response.raise_for_status()
-    # Raw response is raw - list where every item has a single key, 'values'
-    # Transform it into a dict with IDs for keys
-
-    return {x["values"]["id"]: x["values"] for x in response.json()}
-
-
-def attribute_terms(attr_id: int, access_token: str):
-    """Find out more about the values we can use with an attribute, given its ID"""
-    suffix = "/index.php/services/rest/occurrence-attributes"
-    try:
-        response = requests.get(
-            f"{BASE_URL}{suffix}/{attr_id}", headers=headers(access_token)
-        )
-    except Exception as err:
-        logging.error(err)
-        raise
-
-    response.raise_for_status()
-    return response.json()

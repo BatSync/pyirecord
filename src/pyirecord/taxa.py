@@ -1,9 +1,6 @@
 import requests
 import logging
-from pyirecord import BASE_URL
-from pyirecord.http import headers
-
-logging.basicConfig(level=logging.INFO)
+from pyirecord.http import headers, BASE_URL
 
 
 def validate_params(**params):

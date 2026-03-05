@@ -1,15 +1,7 @@
 import requests
-import os
 import logging
 import mimetypes
-from dotenv import load_dotenv
-from pyirecord.http import headers
-
-logging.basicConfig(level=logging.DEBUG)
-
-load_dotenv()
-
-BASE_URL = os.environ.get("IRECORD_BASE_URL", "https://irecord.org.uk")
+from pyirecord.http import headers, BASE_URL
 
 
 class MediaError(Exception):
