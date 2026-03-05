@@ -7,7 +7,6 @@ from pyirecord.surveys import survey_id
 
 # All these default inputs are created in conftest.py
 def test_e2e(sample_record, survey_name, sample_media, jwt):
-
     # Find the ID of our survey. Can be configured in env variables
     s_id = survey_id(survey_name, jwt)
     sample_record["values"]["survey_id"] = s_id

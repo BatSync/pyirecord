@@ -133,6 +133,15 @@ curl --location 'https://warehouse1.indicia.org.uk/index.php/services/rest/sampl
 }
 '
 
+## Attributes
+
+If you check out the sample attributes you will find that is where the habitat is captured.
+
+If you think of the sample as being about the who, where and when and its occurrences as being the what, then it should make sense that habitat is a sample attribute.
+
+curl --location 'https://warehouse1.indicia.org.uk/index.php/services/rest/sample-attributes/?restrict_to_survey_id=179' \
+--header 'Authorization: Bearer <token>
+
 _end of Jim's notes_
 
 The "occAttr" integer sets correspond to [Occurrence Attributes](https://irecord.org.uk/help/import-fields) - you can infer what they are by looking at the guidelines for spreadsheet import to Indicia but this doesn't give a mapping to integer codes for terms and their values. The value ranges are defined as [term lists](https://irecord.org.uk/help/import-termlists) where they are set. It's all similar to iNat's "Observation Fields" but not user-editable.

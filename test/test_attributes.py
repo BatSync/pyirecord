@@ -9,9 +9,14 @@ def test_attrs(jwt):
 
     # Search for attributes pertaining to a survey
     s_id = survey_id("iRecord Bats", jwt)
-    print(s_id)
+
     attrs = attributes(jwt, survey_id=s_id)
     assert attrs
-    # dump data to compare with iRecord devs
-    for k, v in attrs.items():
-        print(v["id"], v["caption"])
+    k = next(iter(attrs))
+    assert k == attrs[k]["id"]
+
+    # Default to occurrence attributes; samples are the same format
+    attrs = attributes(jwt, attribute_type="sample", survey_id=s_id)
+    assert attrs
+    k = next(iter(attrs))
+    assert k == attrs[k]["id"]

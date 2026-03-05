@@ -4,10 +4,17 @@ from typing import Optional
 from pyirecord.http import headers, BASE_URL
 
 
-def attributes(access_token: str, survey_id: Optional[int] = None) -> dict:
+def attributes(
+    access_token: str,
+    attribute_type: str = "occurrence",
+    survey_id: Optional[int] = None,
+) -> dict:
     """Get identifiers and brief metadata for all "occurrence attributes"
     - think of these as controlled tags"""
-    suffix = "/index.php/services/rest/occurrence-attributes"
+
+    if attribute_type not in ["sample", "occurrence"]:
+        raise AttributeError("attribute_type should be either 'sample' or 'occurrence'")
+    suffix = f"/index.php/services/rest/{attribute_type}-attributes"
     params = {}
     if survey_id:
         params["restrict_to_survey_id"] = survey_id
