@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+from typing import List
 from pydantic import BaseModel
 
 
@@ -21,7 +22,7 @@ class Survey(BaseModel):
     parent_id: None
 
 
-class Values(BaseModel):
+class Sample(BaseModel):
     survey_id: int
     entered_sref: str
     entered_sref_system: str
@@ -30,7 +31,8 @@ class Values(BaseModel):
 
 class Occurrence(BaseModel):
     taxa_taxon_list_id: int
-    # TBC
+    # Occurrence Attributes which have the key occAttr:N where N is an integer ID
+    # Their use is restricted to specific surveys; we can't enumerate them here.
 
 
 class MediaItem(BaseModel):
@@ -41,3 +43,8 @@ class MediaItem(BaseModel):
 class OccurrencePost(BaseModel):
     values: Occurrence
     media: list[MediaItem]
+
+
+class SamplePost(BaseModel):
+    values: Sample
+    occurrences: List[OccurrencePost]
