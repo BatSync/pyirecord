@@ -13,6 +13,7 @@ def test_e2e(sample_record, survey_name, sample_media, jwt):
 
     # Upload a media sample and get back a temporary path to attach to record
     media = media_queue({"sound": sample_media}, jwt)
+    print(media)
 
     # This could be 'tempPath'? But examples look like value of 'name'
     media_path = media["sound"]["name"]

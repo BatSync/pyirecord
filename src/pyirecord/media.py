@@ -16,8 +16,8 @@ def media_queue(files: dict, access_token: str):
     * a filename (str)
     * a tuple (filename, open file-like object, mime type)
 
-    {'sound': str or tuple,
-     'photo': str or tuple}
+    {'sound': str or filehandle or tuple,
+     'photo': str or filehandle or tuple}
 
     The keys can have arbitrary names - choose ones you'll remember!
     https://warehouse1.indicia.org.uk/index.php/services/rest#collapse-2
