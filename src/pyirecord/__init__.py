@@ -1,5 +1,6 @@
 from pyirecord.auth import jwt_token as jwt_token
 from pyirecord.surveys import survey_id as survey_id
+from pyirecord.schema import *  # noqa: F403
 from pyirecord.attributes import attributes as attributes
 from pyirecord.attributes import attribute_terms as attribute_terms
 from pyirecord.media import media_queue as media_queue
