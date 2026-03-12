@@ -35,6 +35,10 @@ class Occurrence(BaseModel):
     # Their use is restricted to specific surveys; we can't enumerate them here.
 
 
+class MediaPost(BaseModel):
+    values: MediaItem
+
+
 class MediaItem(BaseModel):
     queued: str
     caption: str
@@ -42,7 +46,7 @@ class MediaItem(BaseModel):
 
 class OccurrencePost(BaseModel):
     values: Occurrence
-    media: list[MediaItem]
+    media: list[MediaPost]
 
 
 class SamplePost(BaseModel):
