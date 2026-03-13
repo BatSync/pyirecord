@@ -42,7 +42,8 @@ def media_queue(files: dict, access_token: str):
                 raise MediaError(err)
 
             files[k] = (f, open(f, "rb"), mimetype)
-    logging.debug(files)
+        else:
+            logging.debug(files[k])
 
     h = headers(access_token)
     del h[
