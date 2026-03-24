@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 
 
@@ -46,7 +46,7 @@ class MediaItem(BaseModel):
 
 class OccurrencePost(BaseModel):
     values: Occurrence
-    media: list[MediaPost]
+    media: Optional[list[MediaPost]]
 
 
 class SamplePost(BaseModel):
