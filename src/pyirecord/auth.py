@@ -54,7 +54,16 @@ def jwt_token(username: str, password: str):
             )
             response.raise_for_status()
             token_info = response.json()
-        except Exception as e:
-            logging.error(e)
+        except httpx.HTTPStatusError as e:
+            logging.error(
+                "iRecord OAuth error: status=%s, response=%s",
+                e.response.status_code,
+                e.response.text
+            )
             raise
+
+        except Exception:
+            logging.exception("Unexpected iRecord authentication error")
+            raise
+          
     return token_info.get("access_token")
