@@ -29,6 +29,13 @@ def token_data(client_id: str, username: str, password: str) -> dict:
 
 
 def check_client():
+    logging.info(
+      "iRecord OAuth configuration: "
+      "token_url=%s, client_id_present=%s, client_secret_present=%s",
+      IRECORD_TOKEN_URL,
+      bool(IRECORD_CLIENT_ID),
+      bool(IRECORD_CLIENT_SECRET),
+    )
     if not IRECORD_CLIENT_ID or not IRECORD_CLIENT_SECRET:
         raise ClientException(
             "No credentials for iRecord client found. "
