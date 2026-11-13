@@ -29,9 +29,11 @@ def token_data(client_id: str, username: str, password: str) -> dict:
 
 
 def check_client():
-    if not IRECORD_CLIENT_ID or not IRECORD_CLIENT_ID:
+    if not IRECORD_CLIENT_ID or not IRECORD_CLIENT_SECRET:
         raise ClientException(
-            "No credentials for iRecord client found. Please set IRECORD_CLIENT_ID and IRECORD_CLIENT_SECRET in a file named .env"
+            "No credentials for iRecord client found. "
+            "Please set IRECORD_CLIENT_ID and "
+            "IRECORD_CLIENT_SECRET in a file named .env"
         )
 
 
