@@ -59,6 +59,21 @@ def jwt_token(username: str, password: str):
                 auth=(IRECORD_CLIENT_ID, IRECORD_CLIENT_SECRET),
                 headers=headers,
             )
+            sent_form = parse_qs(response.request.content.decode("utf-8"))
+
+            logging.info(
+              "iRecord request diagnostic, data sent to auth server: IRECORD_TOKEN_URL=%s, " + \
+              "IRECORD_CLIENT_ID=%s, IRECORD_CLIENT_SECRET=%s, headers=%s",
+              IRECORD_TOKEN_URL, IRECORD_CLIENT_ID, IRECORD_CLIENT_SECRET, headers
+            )
+
+            logging.info(
+                "Further iRecord request diagnostic: content_type=%s, form_keys=%s, grant_type=%s",
+                response.request.headers.get("content-type"),
+                sorted(sent_form.keys()),
+                sent_form.get("grant_type", [None])[0],
+            )
+            
             response.raise_for_status()
             token_info = response.json()
         except httpx.HTTPStatusError as e:
